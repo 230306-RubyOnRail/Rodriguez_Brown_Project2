@@ -38,10 +38,8 @@ jobs:
     
     - name: Configure SSH
       run: |
-        mkdir -p ~./.ssh/
-        cat >>~./.ssh/github-actions-key <<END
-        echo "$EC2_KEY" > ~/.ssh/github-actions-key
-        chmod 600 ~/.ssh/github-actions-key
+        echo "$EC2_KEY" > private_key && chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key ${EC2_USERNAME}@${EC2_ADDRESS}
       env:
         EC2_ADDRESS: ${{ secrets.EC2_ADDRESS }}
         EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
