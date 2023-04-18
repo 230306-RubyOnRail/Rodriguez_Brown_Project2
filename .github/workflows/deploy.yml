@@ -1,0 +1,41 @@
+
+
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Docker Login
+      run: |
+        docker login -u brodrigo1111
+        ${{ DOCKER_SECRET }}
+
+    - name: Create Image
+      run: |
+        docker run -t ruby_project2
+      
+    - name: Push Image
+      run: |
+        docker push ruby_project2:latest
+    
+    - name: SSH into EC2
+      run: |
+        ssh ec2-44-203-153-124.compute-1.amazonaws.com ${{ EC2_KEY }} 
+        
+    - name: Pull Image
+    
+    - name: Execute Image
