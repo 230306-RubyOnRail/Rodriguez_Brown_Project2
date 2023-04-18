@@ -21,7 +21,7 @@ jobs:
       
     - name: Docker Login
       run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }}
+        winpty docker login -u ${{ secrets.DOCKER_USERNAME }}
         ${{ secrets.DOCKER_SECRET }}
 
     - name: Create Image
