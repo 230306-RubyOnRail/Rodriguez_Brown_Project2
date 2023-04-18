@@ -33,7 +33,7 @@ jobs:
     - name: Push Image
       working-directory: Project1
       run: |
-        docker push ruby_project2:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
     
     - name: SSH into EC2
       run: |
