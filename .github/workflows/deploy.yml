@@ -22,7 +22,7 @@ jobs:
     - name: Docker Login
       run: |
         docker login -u brodrigo1111
-        ${{ DOCKER_SECRET }}
+        ${{ secrets.DOCKER_SECRET }}
 
     - name: Create Image
       run: |
@@ -39,7 +39,7 @@ jobs:
     - name: Pull Image
       run: |
         docker login -u brodrigo1111
-        ${{ DOCKER_SECRET }}
+        ${{ secrets.DOCKER_SECRET }}
         docker pull ruby_project2
     
     - name: Execute Image
