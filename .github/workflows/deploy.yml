@@ -26,10 +26,12 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Create Image
+      working-directory: Project1
       run: |
         docker build -t ruby_project2 .
       
     - name: Push Image
+      working-directory: Project1
       run: |
         docker push ruby_project2:latest
     
