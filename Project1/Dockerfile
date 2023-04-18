@@ -12,4 +12,6 @@ EXPOSE 3000
 
 ENV RAILS_ENV development
 
+CMD ["cd", "Project1"]
+
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
