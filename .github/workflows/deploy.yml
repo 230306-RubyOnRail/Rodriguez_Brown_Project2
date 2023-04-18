@@ -62,9 +62,9 @@ jobs:
     
     - name: Pull Image
       run: |
-        docker pull ruby_project2
+        docker pull ${{ secrets.DOCKER_USERNAME }}/ruby_project2
       
     - name: Execute Image
       run: |
-        docker run ruby_project2
+        docker run ${{ secrets.DOCKER_USERNAME }}/ruby_project2
       
