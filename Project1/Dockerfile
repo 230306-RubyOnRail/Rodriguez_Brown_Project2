@@ -2,7 +2,7 @@ FROM ruby:3.1.3
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
+COPY Project1/Gemfile Project1/Gemfile.lock ./
 
 RUN gem install bundler -v 2.4.8 && bundle install
 
