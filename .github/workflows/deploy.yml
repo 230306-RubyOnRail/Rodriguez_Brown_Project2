@@ -25,15 +25,16 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Create Image
-      working-directory: Project1
-      run: |
-        docker build -t ruby_project2:latest .
-      
-    - name: Push Image
-      working-directory: Project1
-      run: |
-        docker push {{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+        
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/clockbox:latest
     
     - name: SSH into EC2
       run: |
