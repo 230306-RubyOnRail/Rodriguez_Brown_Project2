@@ -28,7 +28,7 @@ jobs:
     - name: Create Image
       working-directory: Project1
       run: |
-        docker build -t ruby_project2 .
+        docker build -t ruby_project2:latest .
       
     - name: Push Image
       working-directory: Project1
