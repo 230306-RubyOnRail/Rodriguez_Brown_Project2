@@ -39,7 +39,7 @@ jobs:
     - name: SSH into EC2
       run: |
         mkdir -p ~./.ssh/
-        touch ~./.ssh/github-actions-key
+        cat >>~./.ssh/github-actions-key <<END
         echo "$EC2_KEY" > ~/.ssh/github-actions-key
         chmod 600 ~/.ssh/github-actions-key
         cat >>~/.ssh/config <<END
