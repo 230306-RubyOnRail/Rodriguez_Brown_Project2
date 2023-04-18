@@ -10,7 +10,7 @@ COPY . .
 
 EXPOSE 3000
 
-ENV RAILS_ENV development
+ENV RAILS_ENV production
 
 CMD ["cd", "Project1"]
 
