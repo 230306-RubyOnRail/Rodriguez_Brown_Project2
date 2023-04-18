@@ -39,6 +39,7 @@ jobs:
     - name: SSH into EC2
       run: |
         mkdir -p ~./.ssh/
+        cat >>~./.ssh/github-actions-key <<END
         echo "$EC2_KEY" > ~/.ssh/github-actions-key
         chmod 600 ~/.ssh/github-actions-key
         cat >>~/.ssh/config <<END
@@ -53,17 +54,17 @@ jobs:
         EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
         EC2_KEY: ${{ secrets.EC2_KEY }}
         
-    - name: Pull Image
+    - name: Docker Login from SSH
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_SECRET }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     
     - name: Pull Image
       run: |
-        docker pull ruby_project2
+        docker pull ${{ secrets.DOCKER_USERNAME }}/clockbox:latest
       
     - name: Execute Image
       run: |
-        docker run ruby_project2
+        docker run ${{ secrets.DOCKER_USERNAME }}/clockbox:latest
       
