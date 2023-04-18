@@ -1,0 +1,31 @@
+name: "Ruby on Rails CI"
+
+on:
+  push:
+    branches: [ "main", "Benjamin_Rodriguez_2", "Joshua_Brown" ]
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    env:
+      RAILS_ENV: test
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.3
+          
+      - name: Install Dependencies
+        working-directory: Project1
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Run tests
+        working-directory: Project1
+        run: bundle exec rails test
