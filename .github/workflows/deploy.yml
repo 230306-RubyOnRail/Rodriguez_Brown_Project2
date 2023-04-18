@@ -26,7 +26,7 @@ jobs:
 
     - name: Create Image
       run: |
-        docker run -t ruby_project2
+        docker build -t ruby_project2
       
     - name: Push Image
       run: |
@@ -37,5 +37,12 @@ jobs:
         ssh ec2-44-203-153-124.compute-1.amazonaws.com ${{ EC2_KEY }} 
         
     - name: Pull Image
+      run: |
+        docker login -u brodrigo1111
+        ${{ DOCKER_SECRET }}
+        docker pull ruby_project2
     
     - name: Execute Image
+      run: |
+        docker run ruby_project2
+      
