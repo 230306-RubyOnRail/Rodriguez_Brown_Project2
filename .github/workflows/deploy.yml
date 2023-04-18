@@ -42,20 +42,14 @@ jobs:
         cat >>~./.ssh/github-actions-key <<END
         echo "$EC2_KEY" > ~/.ssh/github-actions-key
         chmod 600 ~/.ssh/github-actions-key
-        cat >>~/.ssh/config <<END
-        HOST ec2
-          HostName #EC2_ADDRESS
-          User #EC2_USERNAME
-          IdentityFile ~/.ssh/github-actions-key
-          StrictHostKeyChecking no
-        END
       env:
         EC2_ADDRESS: ${{ secrets.EC2_ADDRESS }}
         EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
         EC2_KEY: ${{ secrets.EC2_KEY }}
         
     - name: SSH into EC2
-      run: ssh ec2 'ls -la'
+      run: |
+        ssh -i ~/.ssh/github-actions-key "${{ secrets.EC2_ADDRESS }}"
         
     - name: Docker Login from SSH
       uses: docker/login-action@v2
