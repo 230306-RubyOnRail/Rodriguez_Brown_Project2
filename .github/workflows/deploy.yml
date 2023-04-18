@@ -34,7 +34,7 @@ jobs:
     
     - name: SSH into EC2
       run: |
-        ssh ec2-44-203-153-124.compute-1.amazonaws.com ${{ EC2_KEY }} 
+        ssh ec2-44-203-153-124.compute-1.amazonaws.com ${{ secrets.EC2_KEY }} 
         
     - name: Pull Image
       run: |
