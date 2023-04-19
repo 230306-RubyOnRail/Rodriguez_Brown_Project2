@@ -46,6 +46,7 @@ jobs:
         docker stop -a
         docker run -d -p 3000:3000 ruby_project2:latest
         screen -d -m
+        exit
         
 #    - name: Docker Login from SSH
 #      uses: docker/login-action@v2
