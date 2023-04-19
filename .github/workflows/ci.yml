@@ -21,11 +21,9 @@ jobs:
           ruby-version: 3.1.3
           
       - name: Install Dependencies
-        working-directory: Project1
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
 
       - name: Run tests
-        working-directory: Project1
         run: bundle exec rails test
