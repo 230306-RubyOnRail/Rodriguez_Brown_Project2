@@ -41,14 +41,13 @@ jobs:
         touch creds.pem
         echo "${{ secrets.EC2_KEY }}" >> creds.pem
         chmod 400 creds.pem
-        ssh -i creds.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_ADDRESS }} && docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest && docker stop -a && docker run -d -p 3000:3000 ruby_project2:latest && screen -d -m && exit
-#        ls
-#        docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
-#        docker stop -a
-#        docker run -d -p 3000:3000 ruby_project2:latest
-#        screen -d -m
-#        exit
-        
+        ssh -i creds.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
+        docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
+        docker stop -a
+        docker run -d -p 3000:3000 ruby_project2:latest
+        screen -d -m
+        exit
+        EOF        
 #    - name: Docker Login from SSH
 #      uses: docker/login-action@v2
 #      with:
