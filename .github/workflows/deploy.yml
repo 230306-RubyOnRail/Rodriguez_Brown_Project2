@@ -59,49 +59,49 @@ jobs:
 #        docker run -d -p 3000:3000 ruby_project2:latest
 #        screen -d -m
 
-    - name: ls -a via ssh
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: |
-          docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
-          docker stop -a
-          docker run -d -p 3000:3000 ruby_project2:latest
-          screen -d -m
-        host: ${{ secrets.EC2_ADDRESS }}
-        username: ${{ secrets.EC2_USERNAME }}
-        privateKey: ${{ secrets.EC2_KEY}}
+#    - name: ls -a via ssh
+#      uses: garygrossgarten/github-action-ssh@release
+#      with:
+#        command: |
+#          docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest
+#          docker stop -a
+#          docker run -d -p 3000:3000 ruby_project2:latest
+#          screen -d -m
+#        host: ${{ secrets.EC2_ADDRESS }}
+#        username: ${{ secrets.EC2_USERNAME }}
+#        privateKey: ${{ secrets.EC2_KEY}}
 
-#    - name: Configure SSH
-#      run: |
-#        mkdir -p ~/.ssh/
-#        echo "$SSH_KEY" > ~/.ssh/staging.key
-#        chmod 600 ~/.ssh/staging.key
-#        cat >>~/.ssh/config <<END
-#        Host staging
-#          HostName $SSH_HOST
-#          User $SSH_USER
-#          IdentityFile ~/.ssh/staging.key
-#          StrictHostKeyChecking no
-#        END
-#      env:
-#        SSH_USER: ${{ secrets.EC2_USERNAME }}
-#        SSH_KEY: ${{ secrets.EC2_KEY }}
-#        SSH_HOST: ${{ secrets.EC2_ADDRESS }}
+    - name: Configure SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        cat >>~/.ssh/config <<END
+        Host staging
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/staging.key
+          StrictHostKeyChecking no
+        END
+      env:
+        SSH_USER: ${{ secrets.EC2_USERNAME }}
+        SSH_KEY: ${{ secrets.EC2_KEY }}
+        SSH_HOST: ${{ secrets.EC2_ADDRESS }}
 
-#    - name: Docker login
-#      run: ssh staging 'docker login --username ${{ secrets.DOCKER_USERNAME }}'
+    - name: Docker login
+      run: ssh staging 'docker login --username ${{ secrets.DOCKER_USERNAME }}'
 
-#    - name: Give token
-#      run: ssh staging '${{secrets.DOCKER_TOKEN}}'
+    - name: Give token
+      run: ssh staging '${{secrets.DOCKER_TOKEN}}'
 
-#    - name: Docker pull
-#      run: ssh staging 'docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest' 
+    - name: Docker pull
+      run: ssh staging 'docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/ruby_project2:latest' 
            
-#    - name: Stop the server
-#      run: ssh staging 'docker stop -a' 
+    - name: Stop the server
+      run: ssh staging 'docker stop -a' 
            
-#    - name: Start the server
-#      run: ssh staging 'docker run -d -p 3000:3000 ruby_project2:latest'
+    - name: Start the server
+      run: ssh staging 'docker run -d -p 3000:3000 ruby_project2:latest'
 
-#    - name: Set to Background
-#      run: ssh staging 'screen -d -m'
+    - name: Set to Background
+      run: ssh staging 'screen -d -m'
