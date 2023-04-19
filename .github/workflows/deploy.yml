@@ -92,4 +92,4 @@ jobs:
       run: ssh staging 'docker run -d -p 3000:3000 ruby_project2:latest'
 
     - name: Set to Background
-      run: ssh staging 'screen -d -m'      
+      run: ssh staging 'screen -d -m'
