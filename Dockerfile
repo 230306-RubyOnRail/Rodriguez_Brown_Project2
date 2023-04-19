@@ -2,7 +2,7 @@ FROM ruby:3.1.3
 
 WORKDIR /app
 
-COPY Project1/Gemfile Project1/Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./
 
 RUN gem install bundler -v 2.4.8 && bundle install
 
@@ -11,7 +11,5 @@ COPY . .
 EXPOSE 3000
 
 ENV RAILS_ENV production
-
-CMD ["cd", "Project1"]
 
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
