@@ -41,7 +41,7 @@ jobs:
         touch creds.pem
         echo "${{ secrets.EC2_KEY }}" >> creds.pem
         chmod 400 creds.pem
-        ssh -i creds.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ EC2_ADDRESS }}
+        ssh -i creds.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_ADDRESS }}
         
     - name: Docker Login from SSH
       uses: docker/login-action@v2
