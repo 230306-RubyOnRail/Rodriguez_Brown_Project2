@@ -27,3 +27,11 @@ jobs:
 
       - name: Run tests
         run: bundle exec rails test
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test.log
+          path: log/test.log
+      
+      
