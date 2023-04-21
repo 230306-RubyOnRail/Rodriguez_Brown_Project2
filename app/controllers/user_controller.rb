@@ -37,7 +37,6 @@ class UserController < ApplicationController
     reimbursement.each do |reim| 
       reim.delete
     end
-
     user.delete
     render json: { message: 'User deleted successfully' }, status: :ok
   end
